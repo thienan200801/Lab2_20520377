@@ -69,7 +69,7 @@
             this.label1.Size = new System.Drawing.Size(51, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "Tên file";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+ //           this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 
@@ -78,7 +78,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(356, 22);
             this.textBox1.TabIndex = 3;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+   //         this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -87,7 +87,7 @@
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(356, 22);
             this.textBox2.TabIndex = 5;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+  //          this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -97,7 +97,7 @@
             this.label2.Size = new System.Drawing.Size(34, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "URL";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+ //           this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox3
             // 
@@ -106,7 +106,7 @@
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(356, 22);
             this.textBox3.TabIndex = 7;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+ //           this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label3
             // 
@@ -116,7 +116,7 @@
             this.label3.Size = new System.Drawing.Size(58, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Số dòng";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+   //         this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBox4
             // 
@@ -125,7 +125,7 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(356, 22);
             this.textBox4.TabIndex = 9;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+    //        this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label4
             // 
@@ -135,7 +135,7 @@
             this.label4.Size = new System.Drawing.Size(37, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "Số từ";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+    //        this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // textBox5
             // 
@@ -144,7 +144,7 @@
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(356, 22);
             this.textBox5.TabIndex = 11;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+    //        this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label5
             // 
@@ -154,7 +154,7 @@
             this.label5.Size = new System.Drawing.Size(54, 16);
             this.label5.TabIndex = 10;
             this.label5.Text = "Số ký tự";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+    //        this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // Bai2
             // 

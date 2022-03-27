@@ -13,6 +13,8 @@ namespace Lab2_20520377
 {
     public partial class Bai1 : Form
     {
+        private object openFileDialog;
+
         public Bai1()
         {
             InitializeComponent();
@@ -22,13 +24,28 @@ namespace Lab2_20520377
         {
             try
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.ShowDialog();
-                FileStream fs = new FileStream(ofd.FileName, FileMode.OpenOrCreate);
-                StreamReader sr = new StreamReader(fs);
-                string content = sr.ReadToEnd();
-                richTextBox1.Text = content;
-                fs.Close();
+                string fileContent, filePath;
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {                   
+                    openFileDialog.Filter = "txt files (*.txt)|*.txt";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {                      
+                        filePath = openFileDialog.FileName;
+
+                        var fileStream = openFileDialog.OpenFile();
+
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            fileContent = reader.ReadToEnd();
+                        }
+
+                        richTextBox.Text = fileContent;
+                    }
+                }
             }
             catch (Exception exc)
             {
@@ -40,10 +57,23 @@ namespace Lab2_20520377
         {
             try
             {
-                StreamWriter sw = new StreamWriter("C:\\Users\\ThienAn\\Downloads\\output.txt");
-                string txt = richTextBox1.Text;
-                sw.WriteLine(txt);            
-                sw.Close();
+                string fileContent, filePath;
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "txt files (*.txt)|*.txt";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
+
+                    OpenFileDialog ofd = new OpenFileDialog();
+                    ofd.ShowDialog();
+                    FileStream fs = new FileStream(ofd.FileName, FileMode.OpenOrCreate);
+                    StreamWriter sw = new StreamWriter(fs.Name);
+                    string txt = richTextBox.Text;
+                    string contentWriteUpper = txt.ToUpper();
+                    sw.WriteLine(contentWriteUpper);
+                    sw.Close();
+                }
             }
             catch (Exception ex)
             {

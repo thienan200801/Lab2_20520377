@@ -40,5 +40,11 @@ namespace Lab2_20520377
             new Bai4().ShowDialog();
             this.Hide();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new Bai5().ShowDialog();
+            this.Hide();
+        }
     }
 }

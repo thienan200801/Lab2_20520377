@@ -16,5 +16,22 @@ namespace Lab2_20520377
         {
             InitializeComponent();
         }
+
+        private void btn_browse_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                if(fbd.ShowDialog() == DialogResult.OK)
+                {
+                    webBrowser.Url = new Uri(fbd.SelectedPath);
+                    Path.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            if (webBrowser.CanGoBack) webBrowser.GoBack();
+        }
     }
 }
