@@ -1,42 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
+using System.Data;
 
 
-namespace Lab2_20520377
+namespace ExportExcel
 {
-    public partial class Bai4 : Form
+    public partial class Form1 : Form
     {
-        public Bai4()
+
+        string filePath = @"C:\Users\phong\Desktop\sampleData.xlsx";
+        public Form1()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new ThongtinsvBai4().ShowDialog();
-            this.Hide();
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            exportExc
-        }
-
-        private void exportExcel()
-        {
-
-            string filePath = @"C:\Users\phong\Desktop\sampleData.xlsx";
             SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(filePath, SpreadsheetDocumentType.Workbook);
 
             WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
@@ -44,7 +25,7 @@ namespace Lab2_20520377
 
             WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
             worksheetPart.Worksheet = new Worksheet(new SheetData());
-
+            
             Sheets Sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
 
             Sheet sheet = new Sheet()
@@ -61,10 +42,10 @@ namespace Lab2_20520377
 
             char[] reference = "ABCDEFGH".ToCharArray();
 
-            for (int i = 0; i < reference.Length; i++)
+            for (int i=0;i<reference.Length;i++)
             {
                 Row row = new Row();
-                for (int j = 0; j < reference.Length; j++)
+                for (int j=0;j<reference.Length;j++)
                 {
                     Cell cell = new Cell()
                     {
@@ -79,10 +60,10 @@ namespace Lab2_20520377
 
             worksheetPart.Worksheet.Save();
             spreadsheetDocument.Close();
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
 
+
+
+                
         }
     }
 }
