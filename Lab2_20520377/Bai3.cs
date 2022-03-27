@@ -30,57 +30,66 @@ namespace Lab2_20520377
 
         static float value(string c) 
         { 
+            
+
             return float.Parse(c); 
         }
 
-        static float calculate(string[] exp)
+        static float calculate(string exp)
         {
-            if (exp.Length == 0) return -1;
+            string value = new DataTable().Compute(exp, null).ToString();
+            MessageBox.Show(value);
+            return float.Parse(value);
+            //if (exp.Length == 0) return -1;
 
-            float res = value(exp[0]);
+            //float res = value((exp[0]).ToString());
 
-            for (int i = 1; i < exp.Length; i += 2)
-            {
-                string opr = exp[i], opd = exp[i + 1];
+            //for (int i = 1; i < exp.Length; i += 2)
+            //{
+            //    string opr = exp[i].ToString(), opd = exp[i + 1].ToString();
 
-                if (isOperand(opd) == false) return -1;
+            //    if (isOperand(opd) == false) return -1;
 
-                if (opr == "+") res += value(opd);
-                else if (opr == "-") res -= value(opd);
-                else if (opr == "*") res *= value(opd);
-                else if (opr == "/") res /= value(opd);
+            //    if (opr == "+") res += value(opd);
+            //    else if (opr == "-") res -= value(opd);
+            //    else if (opr == "*") res *= value(opd);
+            //    else if (opr == "/") res /= value(opd);
 
-                else return -1;
-            }
-            return res;
+            //    else return -1;
+            //}
+            //return res;
         }
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
+            String content = readFromFile.Text;
+            content = content.Replace('\r', ' ');
+            String[] numb = content.Split(new char[] { '+', '-', '*', '/', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            String[] lines = content.Split('\n');
+            string resString = "0";
+            foreach (var line in lines)
+            {
+                writeToFile.Text += calculate(line).ToString() + "\n";
+            }
+            MessageBox.Show(lines[1]);
+
             try
             {
-                String content = readFromFile.Text;
-                content = content.Replace('\r', ' ');
-                String[] numb = content.Split(new char[] { '+', '-', '*', '/', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-             
-                String[] lines = content.Split('\n');
-                string resString = "0";
-                foreach(var line in lines)
-                {
-                    writeToFile.Text += calculate(line).ToString() + "\n";
-                }
-                //MessageBox.Show(lines[1]);
+
             }
             catch (Exception ex)
             {
+                MessageBox.Show("lol");
+
                 Console.WriteLine("Exception: " + ex.Message);
             }
         }
 
-        private float calculate(object expr1)
-        {
-            throw new NotImplementedException();
-        }
+        //private float calculate(object expr1)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
