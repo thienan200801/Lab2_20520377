@@ -120,32 +120,32 @@ using System.Windows.Forms;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
-
+using System.Data.OleDb;
 
 namespace Lab2_20520377
 {
     public partial class Bai4 : Form
     {
+        private object dataGridView1;
+
         public Bai4()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnRead_Click(object sender, EventArgs e)
         {
             new ThongtinsvBai4().ShowDialog();
             this.Hide();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             exportExcel();
         }
 
         private void exportExcel()
         {
-
-            //string filePath = @"C:\Users\ThienAn\OneDrive - gm.uit.edu.vn\Desktop\sampleData.xlsx";
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "xlsx files (*.xlsx)|*.xlsx";
             saveFileDialog1.Title = "Output";
@@ -194,9 +194,60 @@ namespace Lab2_20520377
             worksheetPart.Worksheet.Save();
             spreadsheetDocument.Close();
         }
-        private void button3_Click(object sender, EventArgs e)
-        {
 
+        public DataTable ReadExcel(string fileName, string fileExt)
+        {
+            string conn = string.Empty;
+            DataTable dtexcel = new DataTable();
+            if (fileExt.CompareTo(".xls") == 0)
+                conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
+            else
+                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=NO';"; //for above excel 2007  
+            using (OleDbConnection con = new OleDbConnection(conn))
+            {
+                try
+                {
+                    OleDbDataAdapter oleAdpt = new OleDbDataAdapter("select * from [Sheet1$]", con); //here we read data from sheet1  
+                    oleAdpt.Fill(dtexcel); //fill excel data into dataTable  
+                }
+                catch { }
+            }
+            return dtexcel;
+        }
+
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {
+            string filePath = string.Empty;
+            string fileExt = string.Empty;
+            OpenFileDialog file = new OpenFileDialog(); //open dialog to choose file  
+            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK) //if there is a file choosen by the user  
+            {
+                filePath = file.FileName; //get the path of the file  
+                fileExt = Path.GetExtension(filePath); //get the file extension  
+                if (fileExt.CompareTo(".xls") == 0 || fileExt.CompareTo(".xlsx") == 0)
+                {
+                    try
+                    {
+                        DataTable dtExcel = new DataTable();
+                        dtExcel = ReadExcel(filePath, fileExt); //read excel file  
+                        dataGridView1.Visible = true;
+                        dataGridView1.DataSource = dtExcel;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please choose .xls or .xlsx file only.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                }
+            }
+        }
+
+        private DataTable ReadExcel(string filePath, string fileExt)
+        {
+            throw new NotImplementedException();
         }
     }
 }
